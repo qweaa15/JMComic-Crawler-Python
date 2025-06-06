@@ -3,7 +3,7 @@
 
 # 下方填入你要下载的本子的id，一行一个，每行的首尾可以有空白字符
 JM_albums=""""''''
-1166177
+jmcomic1166177
 
 
 '''
@@ -55,7 +55,7 @@ option=get_option()get_option()
 
 定义get_option()：get_option()：
 #读取选项配置文件#读取选项配置文件
-option=create_option(操作系统。路径.abspath(操作系统。路径.参加(__file__，'.。/。。/assets/option/option_workflow_download。yml')))create_option(操作系统。路径.abspath(操作系统。路径.参加(__file__，'.。/。。/assets/option/option_workflow_download。yml')))
+option=create_option(操作系统。路径.abspath(操作系统。路径.参加(__file__，'.。/。。/assets/option/option_workflow_download.yml')))create_option(操作系统。路径.abspath(操作系统。路径.参加(__file__，'.。/。。/assets/option/option_workflow_download.yml')))
 
 # 支持工作流覆盖配置文件的配置# 支持工作流覆盖配置文件的配置
 cover_option_config(选项)
@@ -66,9 +66,9 @@ log_before_raise()log_before_raise()
 返回选项
 
 
-def cover_option_config(option: JmOption):
-    dir_rule = env('DIR_RULE', None)
-如果dir_rule不是None：
+Def cover_option_config(选项：JmOption)：
+Dir_rule=env('DIR_RULE'，无)
+如果Dir_rule不是None：
 _old=option.dir_rule
 _new=DirRule(dir_rule，base_dir=the_old.base_dir)
 option.dir_rule=新建
@@ -86,39 +86,39 @@ Def log_before_raise()：
 JM_download_dir=env('JM_DOWNLOAD_DIR'，workspace())
 mkdir_if_not_exists(jm_download_dir)
 
-Def decision_filepath(e)：
-RESP=e.context.get(ExceptionTool.CONTEXT_KEY_RESP，None)
+定义决策文件路径(e)(_F)：
+RESP=e.语境。get(ExceptionTool.Context_KEY_RESP，None)
 
 如果resp为None：
 后缀=str(time_stamp())
-        else:
-            suffix = resp.url
+其他：
+后缀=resp.url
 
-        name = '-'.join(
-            fix_windir_name(it)
-            for it in [
-                e.description,
-                current_thread().name,
-                suffix
+name='-'.join(
+fix_windir_name(它)
+用于[
+E.描述，
+current_thread().name，
+后缀
             ]
         )
 
-        path = f'{jm_download_dir}/【出错了】{name}.log'
-        return path
+path=f'{jm_download_dir}/[出错了]{name}.log'
+返回路径
 
-    def exception_listener(e: JmcomicException):
+Def例外状况监听器(e:JmcomicException)(_L)：
         """
-        异常监听器，实现了在 GitHub Actions 下，把请求错误的信息下载到文件，方便调试和通知使用者
+异常监听器，实现了在GitHub操作下，把请求错误的信息下载到文件，方便调试和通知使用者
         """
-        # 决定要写入的文件路径
-        path = decide_filepath(e)
+# 决定要写入的文件路径
+path=deterin_filepath(e)
 
-        # 准备内容
-        content = [
-            str(type(e)),
-            e.msg,
+# 准备内容
+内容=[
+str((e)型)，
+e.msg，
         ]
-        for k, v in e.context.items():
+对于e.context.items()中的k，v：
             content.append(f'{k}: {v}')
 
         # resp.text
